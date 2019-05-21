@@ -1,0 +1,202 @@
+% commentary
+
+\documentclass[a4paper, 11pt]{article} %type 
+
+% Russian Language
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+
+% Math
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools} 
+\usepackage{wasysym} 
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+% Headline
+
+\author{Турков Матвей}
+\title{Домашнее задание №1}
+\date{\today}
+
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+            
+            
+            \begin{document}
+
+\begin{center}
+  \begin{Large}
+    Домашнее задание 1
+  \end{Large}
+\end{center}
+\begin{center}
+  \begin{Large}
+    Турков Матвей, группа 777
+  \end{Large}
+\end{center}
+
+	\hfill \break	
+
+\subsection*{\circled{1}} 	
+\subsubsection*{\textit{Решение:}}
+\begin{enumerate}
+\item
+\begin{align*}
+&T(n) = 10T(\dfrac{n}{2}) + \dfrac{n^4}{log\,n}
+\end{align*}
+Воспользуемся мастер теоремой.Нам подходит третий случай. Покажем,что 
+\begin{align*}
+&10\,\dfrac{(n/2)^4}{log\,n/2} \leq C \dfrac{n^4}{log\,n}\\
+&10/16 + log\,2/log\,n \leq C
+\end{align*}
+Что верно при достаточно больших $n$ и $C < 1$. Покажем теперь, что 
+\begin{align*}
+&\dfrac{n^4}{log\,n} \geq C\, n ^ {log\,10 + \epsilon}
+\end{align*}
+Пусть $n = e^s$, для некоторого s, тогда
+\begin{align*}
+&e^{4s}/s \geq C\, e^{2,3s + \epsilon \,s}\\
+&c = 1/s \\
+&e^{4s} \geq e^{2,3s+\epsilon \,s}\\
+\end{align*}
+Что верно для некоторого $\epsilon = 1$. Отсюда 
+\begin{align*}
+&T(n) = \Theta (\dfrac{n^4}{log\,n})\\
+\end{align*}
+\item 
+\begin{align*}
+&T(n) = 2T(\dfrac{n}{2}) + \Theta (n\sqrt[3]{n}\,log\,n)
+\end{align*}
+Воспользуемся Акра-Баззи , для которой выполняются все необходимые условия $a_1 = 2, b_1 = 1/2 , f(n) \in O(x^c),c \geq 5$
+\begin{align*}
+&T(n) \in \Theta(n\,(1+\int_{1}^{n} cu^{-2/3}\,log\,u\,du ))\\
+&T(n) \in \Theta(n + 3\,c\,n\,n ^{1/3} (log\,n -3 ) - 9cn)\\
+\end{align*}
+Отсюда
+\begin{align*}
+&T(n) \in \Theta(n^{4/3}log\,n)
+\end{align*}
+\item 
+\begin{align*}
+&T(n) = T(n-1) + 2T(n-2)\\
+&T(1) = T(2) = 1\\
+\end{align*}
+Разрешаем данныю линейную рекуренту в виде $t(n) = C_1\lambda^n + C_2\lambda^n$
+\begin{align*}
+&x^2-x-2 = 0\\
+&t(n) = C_1 (-1)^n + C_2 (2)^n\\
+\end{align*}
+Тогда найдем константы из ууравнений (1) и (2), полученных из начальных условий 
+\begin{align}
+&1 = -C_1 + 2\,C_2\\
+&1 = C_1 + 4\,C_2
+\end{align}
+B итоге,
+\begin{align*}
+&t(n) = -1/3(-1)^n + 1/3(2)^n\\
+&T(n) \in \Theta(2^n)\\
+\end{align*}
+\end{enumerate}
+
+\subsection*{\circled{2}} 	
+\subsubsection*{\textit{Решение:}}
+--------------------------------
+
+\subsection*{\circled{3}} 	
+\subsubsection*{\textit{Решение:}}
+\begin{enumerate}
+	\item Запишем рекурсивную формулу из условия задачи
+	\[T(n) = 3 T(\lceil \frac{n}{\sqrt{3}}\rceil - 5) + 10 \frac{n^3}{\log n}\]
+	\item Найдём оценку снизу
+	\[T(n) = 3 T(\lceil \frac{n}{\sqrt{3}}\rceil - 5) + 10 \frac{n^3}{\log n} > 10 \frac{n^3}{\log n}\]
+	\[T(n) > 10 \frac{n^3}{\log n}\]
+	\item Найдём оценку сверху
+	\[T(n) = 3 T(\lceil \frac{n}{\sqrt{3}}\rceil - 5) + 10 \frac{n^3}{\log n} < 3 T(\lceil \frac{n}{\sqrt{3}}\rceil) + 10 \frac{n^3}{\log n}\]
+	Найдём оценку сверху, используя Мастер Теорему. В данной задаче подходит третий случай .
+	\[\begin{cases}
+		a = 3; \\
+		b = \sqrt{3}\\
+		f(n) = 10 \frac{n^3}{\log n}
+	\end{cases}
+	\]
+	$f(n) = 10 \frac{n^3}{\log n} = \Omega (n^{\log_b a + \varepsilon}) = \Omega (n^{2 + \varepsilon}) = \Omega (n^{2,1})$
+	\[3\cdot 10 \cdot \frac{(\frac{n}{\sqrt{3}})^3}{\log (\frac{n}{\sqrt{3}})} < 0,9 \cdot 10 \cdot\frac{n^3}{\log n}\]
+	\item В итоге, имеем 
+	\[T(n) \in \Theta (\frac{n^3}{\log n}) \]
+\end{enumerate}
+\subsection*{\circled{4}} 	
+\subsubsection*{\textit{Решение:}}
+
+Функция натурального аргумента $S(n)$ задана рекурсией:
+	\[S(n) = \begin{cases}
+		100, n\le100\\
+		S(n-1) + S(n-3), n>100
+   \end{cases}
+    \]
+   \begin{enumerate}
+   	\item Функция, вычисляющая число рекурсивных вызововов данной процедуры задано уравнениями.
+   		\[T(n) = \begin{cases}
+   	1, n\le100\\
+   	T(n-1) + T(n-3), n>100
+   	\end{cases}
+   	\]
+   	Соответственно , наша задача стала эквивалентна вычислению $T(10^{12})$.
+   	\item Имеем рекурентное уравнение $T_{n+3} - T_{n+2} - T_{n+1} = 1$\\\\
+   	Решая его получим необходимый ответ.
+   	Решим характеристическое уравнение $\lambda^3  - \lambda^2 - 1=0$  
+   		\\\\	Получили корни(прим Wolphram):
+   				\[\begin{cases}
+x = 1,4656 \\
+x = -0,233 + 0,793i\\				
+x = -0,233 - 0,793i\\
+   	\end{cases}
+	\]
+	\item $t(k) = A\cdot 1,4656^k + B \cdot (\exp(-0,233 + 0,793i)) + C \cdot \exp (-0,233 - 0,793i)$, где $A,B,C$ -- некоторые константы.
+	\item $0,233^2 + 0,793^2 < 1 \Rightarrow$ при $k \rightarrow \infty$, экспонента стремится к нулю. $\Rightarrow t(k) = A\cdot 1,4656^k$ \\
+	\item $T_k = -1$ -- частное решение.
+	   				\[\begin{cases}
+t(k) = -1 + A\cdot 1,4656^k\\
+t(100) = 1
+	\end{cases}\]
+	$1 = -1 + A\cdot 1,4656^{100} \Rightarrow A = 2 \cdot 1,456^{-100}$
+	\item В итоге имеем :
+	\[t(n) = -1 + 2\cdot 1,456^{n-100} \approx 2\cdot 1,456^{10^{12}-100}\]
+   \end{enumerate}
+
+\subsection*{\circled{5}} 	
+\subsubsection*{\textit{Решение:}}
+\[T(n) = nT\left(\left\lceil\frac{n}{2}\right\rceil\right) + O(n)\]\\\\
+Решим задачу рассмотреннием дерева рекурсии \\\\
+Высота $\log\, n$. \\\\ На $i-$том уровне выполняется $\dfrac{n^i}{2^{(i^2+i)/2}}$ операций по $O\left(\frac{n}{2^i}\right)$ каждая. \\\\
+Тогда отсюда имеем :\\\\
+\[T(n) = \sum\limits_{i=1}^{\log\, n}\frac{n^i}{2^{i(i+1)/2}}O\left(\frac{n}{2^i}\right) \]
+
+\[\sum\limits_{i=1}^{\log\,n}O\left(\frac{n^{i+1}}{2^{i(i+1)/2+i}}\right)\] 
+
+Пусть $n = 2^k$, тогда проведя эту замену и некоторое количество арифметики , получим
+
+\[ \sum\limits_{i=1}^{\log\,n}O\left(2^{ki/2}\right) = \sum\limits_{i=1}^{\log\, n}O\left(\sqrt{n^i}\right) = O(n^{\frac{\log n}{2}})\]
+
+
+\subsection*{\circled{6}} 	
+\subsubsection*{\textit{Решение:}}
+В случае со степенью двойки выражение
+\[T(n) = T(\frac{n}{2}) + T(\frac{n}{4})\]
+Пусть  $k = \log_2n$:
+\[T(k) = T(k-1) + T(k-2) + 3\]
+Что издали напоминает рекуренту для чисел Фибоначчи. Решив данную линейную рекуренту,с учетом начальных условий 
+ $T(1) = 3, T(2) = 6$
+ , получим ,что :
+\[T(m) = \left(\frac{1+\sqrt{5}}{2}\right)^m\cdot\left(\frac{3}{2}+\frac{3}{2\sqrt{5}}\right) + \left(\frac{1-\sqrt{5}}{2}\right)^m\cdot\left(\frac{3}{2}-\frac{3}{2\sqrt{5}}\right)\]
+
+\subsection*{\circled{7}} 	
+\subsubsection*{\textit{Решение:}}
+--------------------------------
+
+
+
+
+\end{document}

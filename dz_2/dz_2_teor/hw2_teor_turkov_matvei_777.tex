@@ -1,0 +1,100 @@
+% commentary
+
+\documentclass[a4paper, 11pt]{article} %type 
+
+% Russian Language
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+
+% Math
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools} 
+\usepackage{wasysym} 
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+% Headline
+
+\author{Турков Матвей}
+\title{Домашнее задание №2}
+\date{\today}
+
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+            
+            
+            \begin{document}
+
+\begin{center}
+  \begin{Large}
+    Домашнее задание 2
+  \end{Large}
+\end{center}
+\begin{center}
+  \begin{Large}
+    Турков Матвей, группа 777
+  \end{Large}
+\end{center}
+
+	\hfill \break	
+\subsection*{\circled{1}} 
+\subsubsection*{\textit{Условие:}}	
+ Докажите, что 
+\begin{enumerate}
+    \item Класс $\mathcal{P}$ замкнут относительно конкатенации.
+    \item Класс $\mathcal{P}$ замкнут относительно итерации.
+    \item Класс $\mathcal{P}$ замкнут относительно четной итерации.
+\end{enumerate}
+\subsubsection*{\textit{Решение:}}
+\begin{enumerate}
+\item Пусть $L_1 \in \mathcal{P},L_2 \in \mathcal{P} $ и они принимаются $MT_1 , MT_2$ соответственно. Причем $MT_1$ за $O(n^{k_1})$ и $MT_2$ за $O(n^{k_2})$, где $n$ - длина входа , а $k_1,k_2$ некоторые константы. Опишем $MT_3$ принимающюю язык $L_1 \cdot L_2$
+\par Пусть $MT_3$ проходит по всем возможным разбиениям слова на входе 
+($w$ на $w_1,w_2$) и проверяет, принимает ли $MT_1 w_1$ и  $MT_2 w_2$, так что $w_1w_2 \in L_1 \cdot L_2$ Эта стадия занимает $O(n^{k_1}) + O(n^{k_2}) = O^{max(k_1,k_2)}$, что полиномиально по времени. Поскольку процесс данной проверки на разбиениях ($w$ на $w_1,w_2$) может произойти максимум $n+1$ раз , то и соответсвенно время работы $MT_3$ займет максимум $O(n+1)O^{max(k_1,k_2)} = O^{1+max(k_1,k_2)}$, что есть полином. Отсюда и следует замкнутость относительно конкатенации.  
+\end{enumerate}
+
+\subsection*{\circled{2}} 
+\subsubsection*{\textit{Условие:}}	
+Приведите пример языка $L$, не лежащего в классе $\mathcal{P}$ такого, что язык $L^*$ в классе $\mathcal{P}$ лежит.
+\subsubsection*{\textit{Решение:}}
+Возьмем язык $a^{k^n}, \ n \geq 0 , k > 1 $. Для того чтобы МТ принила данный язык необходимо , чтобы она посчитала экспоненциальное число букв $a$, что , очевидно, невыполнимо за полиномиальное время, а значит язык $L$ не принадлежит классу $\mathcal{P}$ . 
+\par 
+В тоже время в языке $L$ содержится слово $a^{k^0} = a$, отсюда следует , что  $L^* = \{a^*\}$ - регулярный язык, а значит найдется такой  ДКА , а в следствие и МТ , которые будут принимать данный язык за полинамиальное время ,  а значит $ L^* \in \mathcal{P}$
+
+\subsection*{\circled{3}} 
+\subsubsection*{\textit{Условие:}}
+Существует ли язык $L \notin \mathcal{P}$, такой, что язык множества его подслов $A(L) \in \mathcal{P}$?
+
+\subsubsection*{\textit{Решение:}}
+Да, существует , примером может служить язык из предыдущей задачи. У языка $a^{k^n}, \ n \geq 0 , k > 1 $ множество подслов $\{a^*\} \in \mathcal{P}$
+
+
+\subsection*{\circled{4}} 
+\subsubsection*{\textit{Условие:}}
+Регулярный язык $L$ задан регулярным выражнием. Постройте полиномиальный алгоритм проверки непринадлежности $w \notin L$.
+
+\subsubsection*{\textit{Решение:}}
+ Из курса тряп известно, что можно провести такой порядок действий 
+ РВ - НКА , который за время равное длине слова построит НКА. По НКА можно построить обратный автомат и дополнить до полного за несколько итераций по длине входа. Отсюда, сможем проверить непринадлежность слова $w \notin L$ за полиномиальное время
+
+
+\subsection*{\circled{6}} 
+\subsubsection*{\textit{Условие:}}	
+{Условие:} Вычислите 2566·9601 с помощью алгоритма Карацубы.
+\subsubsection*{\textit{Решение:}}
+\[2566\cdot9601 = 66\cdot(1)+((25+66)(96+(1))-25\cdot96-66\cdot(1))\cdot100+25\cdot96\cdot10000\]
+\[66\cdot(1) = 6\cdot1+(12\cdot1-0-6)\cdot10+0 = 66\]
+\[91\cdot97 = 7\cdot1 + (10\cdot16-81-7)\cdot10+81\cdot100 = 8827\]
+\[25\cdot96 = 5\cdot6 + (7\cdot15-18-30)\cdot10 + 1800 = 2400\]
+\[2566\cdot9601 = 66+(8827-2400-66)\cdot100+24000000 = 24636166\]
+
+
+
+
+
+
+
+
+
+\end{document}

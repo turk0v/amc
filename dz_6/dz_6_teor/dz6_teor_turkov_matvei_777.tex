@@ -1,0 +1,169 @@
+% commentary
+
+\documentclass[a4paper, 11pt]{article} %type 
+
+% Russian Language
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+
+% Math
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools} 
+\usepackage{wasysym} 
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+\usepackage{hyperref} 
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage[normalem]{ulem}
+% Headline
+
+\author{Турков Матвей}
+\title{Домашнее задание №6}
+\date{\today}
+
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+            
+            
+            \begin{document}
+
+\begin{center}
+  \begin{Large}
+    Домашнее задание 6
+    \end{Large}
+\end{center}
+\begin{center}
+  \begin{Large}
+    Турков Матвей, группа 777
+  \end{Large}
+\end{center}
+
+	\hfill \break	
+
+На удивление, в этом домашнем задании уж слишком много пересечений с семинаром Горбунова по данной теме, поэтому я решил не техать, уже затеханное другим семинаристом (press F to pay \sout{dis}respect)
+
+\subsection*{\circled{1}} 
+\subsubsection*{\textit{Решение:}}
+\begin{enumerate}
+\item Семинар 08, стр 4-5
+\item Пользуясь свойствами матриц и прошлым пунктом, получим
+\begin{align*}
+a_i =\frac{1}{n} \sum_{k = 0}^{n-1}y_k w_n^{-ik}
+\end{align*}
+\end{enumerate}
+
+\subsection*{\circled{2}} 
+\subsubsection*{\textit{Решение:}}
+\begin{enumerate}
+\item Перемножьте многочлены $1+2x+3x^2, 3x-4+6x^3$ с помощью ДПФ $(w_8 = e^{\frac{2\pi i}{8}})$
+\newline Для первого многочлена распишем подробно, остальные , аналогично 
+\[
+DFT
+\begin{pmatrix}
+1 \\ 0
+\end{pmatrix} = 
+\begin{pmatrix}
+1 \\ 1
+\end{pmatrix};
+DFT
+\begin{pmatrix}
+3 \\ 0
+\end{pmatrix} = 
+\begin{pmatrix}
+3 \\ 3
+\end{pmatrix};
+DFT
+\begin{pmatrix}
+2 \\ 0
+\end{pmatrix} = 
+\begin{pmatrix}
+2 \\ 2
+\end{pmatrix};
+DFT
+\begin{pmatrix}
+0 \\ 0
+\end{pmatrix} = 
+\begin{pmatrix}
+0 \\ 0
+\end{pmatrix}
+\]
+\[DFT
+\begin{pmatrix}
+1 \\ 3 \\0 \\0
+\end{pmatrix} = 
+\begin{pmatrix}
+4 \\ 1 + 3e^{\frac{2i\pi}{4}}\\ -2 \\ 1 - 3e^{\frac{2i\pi}{4}}
+\end{pmatrix};
+DFT
+\begin{pmatrix}
+2 \\ 0 \\0 \\0
+\end{pmatrix} = 
+\begin{pmatrix}
+2 \\ 2 \\ 2 \\ 2
+\end{pmatrix};
+\]
+
+\[DFT
+\begin{pmatrix}
+1 \\ 2 \\ 3 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+\end{pmatrix} = 
+\begin{pmatrix}
+6\\ 1 + 3e^{\frac{2i\pi}{4}} + 2e^{\frac{2i\pi}{8}} \\ -2 + 2e^{\frac{4i\pi}{8}}  \\ 1 - 3e^{\frac{2i\pi}{4}} +2e^{\frac{6i\pi}{8}}   \\ 2 \\ 1 + 3e^{\frac{2i\pi}{4}} -  2e^{\frac{2i\pi}{8}}  \\ -2  - 2e^{\frac{4i\pi}{8}} \\ 1 - 3e^{\frac{2i\pi}{4}}  - 2e^{\frac{6i\pi}{8}}
+\end{pmatrix}
+\]
+
+Аналогично, для второго 
+
+\[DFT
+\begin{pmatrix}
+-4 \\ 3 \\ 0 \\ 6 \\ 0 \\ 0 \\ 0 \\ 0
+\end{pmatrix} = 
+\begin{pmatrix}
+5\\ -4 -\frac{3}{\sqrt{2}} + \frac{9}{\sqrt{2}}i\\ -4 -3i  \\-4+\frac{3}{\sqrt{2}} + \frac{9}{\sqrt{2}}i  \\ -13 \\-4+\frac{3}{\sqrt{2}} - \frac{9}{\sqrt{2}}i   \\ -4  + 3i \\ -4 -\frac{3}{\sqrt{2}} - \frac{9}{\sqrt{2}}i
+\end{pmatrix}
+\]
+
+\[
+DFT(1+2x+3x^2) \times DFT(3x-4+6x^3) = 
+\begin{pmatrix}
+30\\-16-19\sqrt{2} -(6+4\sqrt{2})i \\ 14 -2i\\ -16+19\sqrt{2} +(6-4\sqrt{2})i\\-26 \\-16+19\sqrt{2} +(-6+4\sqrt{2})i\\14 + 2i\\-16-19\sqrt{2} +(6+4\sqrt{2})i
+\end{pmatrix}
+\]
+
+\[
+invDFT(DFT(1+2x+3x^2) \times DFT(3x-4+6x^3)) = 
+\begin{pmatrix}
+-4 \\ -5 \\-6\\15 \\12 \\18 \\ 0 \\ 0
+\end{pmatrix}
+\]
+
+
+\end{enumerate}
+
+\subsection*{\circled{3}} 
+\subsubsection*{\textit{Решение:}}
+\begin{enumerate}
+\item Семинар 08, стр 6-7 
+\item Семинар 08, стр 6-7 
+\end{enumerate}
+
+\subsection*{\circled{4}} 
+\subsubsection*{\textit{Решение:}}
+\begin{enumerate}
+\item $DFT(c_0, c_1, ... c_{n-1}) \times DFT(x_0, x_1, ... x_{n-1}) = DFT(b_0, b_1, ... b_{n-1})$
+\[DFT(c_0, c_1, ... c_{n-1}) \times DFT(x_0, x_1, ... x_{n-1}) = \]\[
+\begin{pmatrix}
+\sum c_i \cdot \sum x_i \\ \sum c_iw_n^{i} \cdot \sum x_i w_n^{i} \\ ... \\ \sum
+ c_iw_n^{i(n-1)} \cdot \sum x_i w_n^{i(n-1)}
+\end{pmatrix} = DFT(b_0, b_1, ... b_{n-1})
+\]
+\item Семинар 08, стр 8
+\end{enumerate}
+
+
+
+\end{document}
