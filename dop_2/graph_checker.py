@@ -19,13 +19,15 @@ def check_cyclic(g):
 
 gr = {0: (1,), 1: (2,), 2: (0,3)}
 
+print(check_cyclic(gr))
+
 def total_checker(graph):
 	if (check_cyclic(graph) == True):
 		return True
 	else:
 		return False
 
-# print(total_checker(gr))
+
 
 
 

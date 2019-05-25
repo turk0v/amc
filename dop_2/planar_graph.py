@@ -1,3 +1,5 @@
+from graph_checker import check_cyclic
+
 class Graph(object):
 
 	def __init__(self,vertices,edges):
@@ -53,8 +55,12 @@ class Graph(object):
 				return True
 			return False
 
+
 	def __str__(self):
 		return(str(self.graph_dict))
+
+	def __call__(self):
+		return self.graph_dict
 
 
 def graph_creator(filename):
@@ -72,3 +78,16 @@ def graph_creator(filename):
 	graph.sort_graph_keys()
 	return graph
 
+
+def check_graph(filename):
+	cur_graph = graph_creator(filename)
+	print(cur_graph)
+	# check_cyclic(cur_graph)
+	# if (cur_graph.is_connected() and check_cyclic(cur_graph)):
+	# 	print("ok")
+	# else:
+	# 	print("connectivity {}".format(cur_graph.is_connected()))
+	# 	print("cyclic {}".format(check_cyclic(cur_graph)))
+
+
+check_graph('graph.txt')
