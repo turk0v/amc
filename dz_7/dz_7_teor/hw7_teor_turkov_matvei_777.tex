@@ -1,0 +1,71 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english, russian]{babel}
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools, forest}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{multirow}
+\usepackage{forest}
+\usepackage{float}
+
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+\begin{document}
+
+\begin{center}
+  \begin{Large}
+    Домашнее задание 7
+  \end{Large}
+\end{center}
+\begin{center}
+  \begin{Large}
+    Турков Матвей, группа 777
+  \end{Large}
+\end{center}
+
+
+\section*{Сортировки}
+
+\subsection*{\circled{1}} 
+\subsubsection*{\textit{Решение:}}
+
+Попробуем построить алгоритм, сходный с сортировкой слиянием. А именно пусть без ограничения общности наш массив элементов $A$ и соответствующий ему массив инверсий $P$ имеют длину $2^k$. Поделим его на две части, пока не получим единичные массивы. Тогда $P[0] = 0$. Далее будем сранивать массивы $A_1$ и $A_2$. 
+\newline Если $(A_1[i] < A_2[j])$ выполнить $P[j + i] = P_1[i]; i++;$ 
+\newline Иначе $P[j+i] = P_2[j]; j++;$
+
+
+Сложность аналогична сложности сортировки слиянием $O(n\cdot\log{n})$.
+\section*{Кучи}
+
+\subsection*{\circled{1}} 
+\subsubsection*{\textit{Решение:}}
+
+На высоте $h$, считая что у листье $h = 0$, содержиться не более $\left\lceil\frac{n}{2^{k+1}}\right\rceil.$
+
+$h \in [0, \lfloor\log{n}\rfloor]$
+
+\[\sum_{k=0}^{\lfloor\log{n}\rfloor} \left\lceil\frac{n}{2^{k+1}}\right\rceil \cdot O(k) = n\cdot O\left(\sum_{k=0}^{\lfloor\log{n}\rfloor} \left\lceil\frac{k}{2^{k+1}}\right\rceil\right)= O(n)\]
+
+\section*{Графы}
+
+\subsection*{\circled{1}} 
+\subsubsection*{\textit{Решение:}}
+
+Рассмотрим модификацию алгоритма $BFS$. Теперь вместо обычного стека, будет использовать двусторонний - дек. Тогда если мы перешли в вершину $v$ по нулевому ребру, то добавим $v$ в начало дека; если же по ребру весом 1 — в конец.
+
+Тааким образом, как и в обходе в ширину, мы будем рассматривать каждый раз вершину, расстояние до которой минимально. А "релаксация" ребер остается такой же, как и в $BFS$, поэтому алгоритм корректен.
+
+\subsection*{\circled{2}} 
+\subsubsection*{\textit{Решение:}}
+
+Будем решать задачу с помощью поиска в глубину. То есть из каждой вершины, в которую мы ещё ни разу не приходили, запустим поиск в глубину, который при входе в вершину будет красить её в серый цвет, а при выходе из нее — в чёрный. И, если алгоритм пытается пойти в серую вершину, то это означает, что цикл найден.
+
+\subsection*{\circled{3}} 
+\subsubsection*{\textit{Решение:}}
+
+Аналогично алгоритму из предыдущего пункта запустим $DFS$ из каждой вершины графа. В итоге мы обнаружим, есть ли цикл для каждой из вершин графа. Длину цикла можно получить так: при запуске из вершины $v$ определим $counter_v = 0$. Далее при каждой покраске вершины в серый цвет, будет инкрементировать $counter$, при ее покраске в черный — декрементировать $counter$. Если мы на каком-то моменте попытаемся войти в начальную черную вершину - считываем $counter$, получим длину цикла. Далее просто сравним циклы. Из каждой вершины $DFS$ — $O(V(V+E))$.
+
+
+\end{document}
